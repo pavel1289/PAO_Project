@@ -1,6 +1,8 @@
-package files;
+package model;
 
-public class ExecutableFile extends File{
+import model.File;
+
+public class ExecutableFile extends File {
     public ExecutableFile() {
         super("NoName", "Executable");
     }

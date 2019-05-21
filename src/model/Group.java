@@ -1,16 +1,17 @@
-package groups;
+package model;
 
-import users.CommonUser;
+import exceptions.UserNotExistingException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Group {
     String name;
-    ArrayList<CommonUser> users;
+    List<User> users;
 
     public Group(String name) {
         this.name = name;
-        this.users = new ArrayList<CommonUser>(0);
+        this.users = new ArrayList<>(0);
     }
 
     public String getName() {
@@ -21,17 +22,20 @@ public class Group {
         this.name = name;
     }
 
-    public ArrayList<CommonUser> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void addUser(CommonUser user) {
+    public void addUser(User user) {
         users.add(user);
     }
 
-    public void deleteUser(CommonUser user) {
+    public void deleteUser(User user) throws UserNotExistingException{
         if (users.contains(user)) {
             users.remove(user);
+        }
+        else {
+            throw new UserNotExistingException("User isn't in this group");
         }
     }
 }

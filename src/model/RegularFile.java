@@ -1,6 +1,8 @@
-package files;
+package model;
 
-public class RegularFile extends File{
+import model.File;
+
+public class RegularFile extends File {
     public RegularFile() {
         super("NoName", "Regular File");
     }
@@ -8,7 +10,4 @@ public class RegularFile extends File{
     public RegularFile(String name) {
         super(name, "Regular File");
     }
-
-    public void openFile() {}
-    public void closeFile() {}
 }

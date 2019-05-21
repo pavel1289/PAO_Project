@@ -1,20 +1,23 @@
-package files;
+package model;
+
+import model.File;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DirectoryFile extends File{
-    ArrayList<File> files;
+public class DirectoryFile extends File {
+    List<File> files;
 
     public DirectoryFile(String name) {
         super(name, "Directory");
-        files = null;
+        files = new ArrayList<>();
     }
     public DirectoryFile() {
         super("NoName", "Directory");
-        files = null;
+        files = new ArrayList<>();
     }
 
-    public ArrayList<File> getFiles() {
+    public List<File> getFiles() {
         return files;
     }
 
