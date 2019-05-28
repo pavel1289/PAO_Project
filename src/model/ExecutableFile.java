@@ -12,5 +12,6 @@ public class ExecutableFile extends File {
     }
 
     public void execute() {
+        System.out.println("Executing file " + name);
     }
 }
