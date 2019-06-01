@@ -1,0 +1,3 @@
+exec1, ExecutableFile
+text1, TextFile
+dir1, DirectoryFile

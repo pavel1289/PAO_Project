@@ -1,0 +1,6 @@
+pavel, Pavel, parola1, pavel
+mircea, Mircea, parola2, mircea
+marina, Marina, parola3, marina
+ioana, Ioana, parola4, ioana
+andrei, Andrei, parola5, andrei
+alex, Alex, parola6, alex

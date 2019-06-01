@@ -1,7 +1,6 @@
 package repository;
 
 import exceptions.UserNotExistingException;
-import model.Group;
 import model.User;
 
 import java.sql.Connection;
@@ -9,17 +8,20 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class UserRepository {
-    private String url = "jdbc:mysql://localhost/lab12";
+    private String url = "jdbc:mysql://localhost/proiect";
     private String username = "";
     private String password = "";
     List<User> userList;
 
     public UserRepository() {
         userList = new ArrayList<>();
+    }
+
+    public UserRepository(List<User> userList) {
+        this.userList = userList;
     }
 
     public void addUser(User user) {
@@ -38,6 +40,15 @@ public class UserRepository {
             throw new UserNotExistingException("User doesn't exist");
         }
     }
+
+    public User getUserByLoginName(String loginName) {
+        for(User user : userList) {
+            if (user.getLoginName().equals(loginName))
+                return user;
+        }
+        return null;
+    }
+
     public void addUserDB(User user) {
         String q1 = "INSERT INTO users VALUES (?, ?)";
         try (
@@ -53,7 +64,7 @@ public class UserRepository {
     }
 
     public User getUserDB(String userName) {
-        User user = new User();
+        User user = new User("", "");
         user.setLoginName(userName);
         String q1 = "SELECT * from users where login_name == " + userName;
         try (

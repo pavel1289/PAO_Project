@@ -8,9 +8,21 @@ import java.util.List;
 
 public class UserService {
     private UserRepository userRepository;
+    private static UserService userService;
 
-    public UserService() {
-        userRepository = new UserRepository();
+    public static UserService getInstance(String path, String fileName) {
+        if (userService == null) {
+            synchronized (UserService.class) {
+                if (userService == null) {
+                    userService = new UserService(path, fileName);
+                }
+            }
+        }
+        return userService;
+    }
+
+    private UserService(String path, String fileName) {
+        userRepository = new UserRepository(UserReaderService.readUsers(path, fileName));
     }
 
     public void addUser(User user) {
@@ -22,13 +34,14 @@ public class UserService {
     }
 
     public List<User> getUserList() {
-        userRepository.getUserList();
+        return userRepository.getUserList();
     }
 
-    public void readUserList(String fileName) {
-        List<User> userList = UserReaderService.readUsers(fileName);
-        for (u : userList) {
-            userRepository.addUser(u);
-        }
+    public User getUserByLoginName(String loginName) {
+        return userRepository.getUserByLoginName(loginName);
+    }
+
+    public void writeUsers(String path) {
+        UserWriterService.writeUsers(path, userRepository.getUserList());
     }
 }

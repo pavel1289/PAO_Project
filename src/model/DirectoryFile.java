@@ -9,11 +9,7 @@ public class DirectoryFile extends File {
     List<File> files;
 
     public DirectoryFile(String name) {
-        super(name, "Directory");
-        files = new ArrayList<>();
-    }
-    public DirectoryFile() {
-        super("NoName", "Directory");
+        super(name);
         files = new ArrayList<>();
     }
 
@@ -23,5 +19,11 @@ public class DirectoryFile extends File {
 
     public void addFile(File file) {
         files.add(file);
+    }
+
+    @Override
+    public void printFile() {
+        System.out.println(name + " DirectoryFile");
+        files.forEach(p -> p.printFile());
     }
 }

@@ -1,0 +1,2 @@
+file1, ExecutableFile
+file2, TextFile

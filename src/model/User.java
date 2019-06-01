@@ -1,27 +1,22 @@
 package model;
 
-import exceptions.GroupNotExistingException;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class User implements RegularUser, Administrator{
+public class User {
     String loginName;
     String fullName;
     String password;
-    List<Group> groups;
+    DirectoryFile rootDirectoryFile;
 
     public User(String loginName, String password) {
         this.loginName = loginName;
         this.password = password;
-        this.groups = new ArrayList<>(0);
+        this.rootDirectoryFile = new DirectoryFile(loginName + "_files.csv.txt");
     }
 
-    public User(String loginName, String fullName, String password) {
+    public User(String loginName, String fullName, String password, DirectoryFile rootDirectoryFile) {
         this.loginName = loginName;
         this.fullName = fullName;
         this.password = password;
-        this.groups = new ArrayList<Group>(0);
+        this.rootDirectoryFile = rootDirectoryFile;
     }
 
     public String getLoginName() {
@@ -48,54 +43,24 @@ public class User implements RegularUser, Administrator{
         this.password = password;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public DirectoryFile getRootDirectoryFile() {
+        return rootDirectoryFile;
     }
 
-    @Override
     public void changePassword(String newPassword) {
         this.setPassword(newPassword);
     }
 
-    @Override
     public void changeName(String newName) {
         this.setLoginName(newName);
     }
 
-    @Override
     public void changeFullName(String newFullName) {
         this.setFullName(newFullName);
     }
 
-    @Override
-    public void changeSomeoneElsePassword(RegularUser regularUser, String newPassword) {
-        regularUser.changePassword(newPassword);
-    }
-
-    @Override
-    public void changeSomeoneElseName(RegularUser regularUser, String newName) {
-        regularUser.changeName(newName);
-    }
-
-    @Override
-    public void changeSomeoneElseFullName(RegularUser regularUser, String newFullName) {
-        regularUser.changeFullName(newFullName);
-    }
-
-    @Override
-    public void addToGroup(User user, Group group) {
-        user.groups.add(group);
-        group.addUser(user);
-    }
-
-    @Override
-    public void removeFromGroup(User user, Group group) throws GroupNotExistingException{
-        if (user.groups.contains(group)) {
-            user.groups.remove(group);
-        }
-        else {
-            throw new GroupNotExistingException("User is not in this group");
-        }
-        group.deleteUser(user);
+    public void printFiles() {
+        System.out.println("Files of " + loginName);
+        rootDirectoryFile.printFile();
     }
 }
